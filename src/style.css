@@ -1,0 +1,337 @@
+/* Μορφοποίηση γενική */
+.header {
+    font-family: Arial, sans-serif;
+    background-color: #9f9f9f;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.body {
+    font-family: Arial, sans-serif;
+    background-color: #9f9f9f;
+    color: white;
+    padding: 10px;
+}
+
+.main {
+    font-family: Arial, sans-serif;
+    background-color: #1e88da;
+    color: white;
+    padding: 10px;
+}
+
+.footer {
+    font-family: Arial, sans-serif;
+    background-color: #1e88da;
+    color: white;
+    padding: 10px;
+}
+
+.main-menu {
+    font-family: Arial, sans-serif;
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color:#0f0c7d;
+}
+
+.main-menu a {
+    float: left;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 16px;
+    font-size: 17px;
+}
+
+.main-menu a:hover {
+    background-color: #1e88da;
+}
+
+.main-menu a.active {
+    background-color: #1e88da;
+    text-decoration: underline;
+}
+
+/*Pseudo-classes για την σελίδα του car-market & car-market-1-details*/
+.link-editor a {
+    color: white;
+}
+
+.link-editor a:hover {
+    color: #0f0c7d;
+}
+
+.main .vehicle-listing .link-editor a:hover{
+    color: #1e88da;
+}
+
+.footer .link-editor a:hover{
+    color: #0f0c7d;
+}
+
+/* -------------------Laptops-Desktops------------------- */
+
+@media only screen and (max-width: 10000px) {
+
+    .grid-container-index {
+        display: grid;
+        grid-template-columns: 4fr 1fr 2fr;
+        background-color: #1e88da;
+    }
+    
+    .grid-container-categories {
+        display: grid;
+        grid-template-columns: 1fr 3fr 2fr;
+        background-color: #1e88da;
+    }
+
+    .grid-container-aboutus .main {
+        display: grid;
+        grid-template-columns: 2fr 2fr 2fr;
+        background-color: #1e88da;
+    }
+
+    .grid-container-contactus .main{
+        display: grid;
+        grid-template-columns: 2fr 2fr 2fr;
+        background-color: #1e88da;
+    }
+
+    .vehicle-listing {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        align-items: center;
+        grid-gap: 25px;
+        margin: 25px;
+    }
+
+    .car-info {
+        display: grid;
+        grid-template-columns: 2fr 2fr 2fr;
+        grid-gap: 20px;
+    }
+
+    .grid-container-createaccount {
+        display: grid;
+        grid-template-columns: 2fr 2fr 2fr;
+        grid-gap: 20px;
+    }
+}
+
+/* -------------------Tablets------------------- */
+
+@media only screen and (max-width: 1500px) {
+    
+    .grid-container-index {
+        display: grid;
+        grid-template-columns: 4fr 2fr;
+        background-color: #1e88da;
+    }
+
+    .grid-container-categories {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        background-color: #1e88da;
+    }
+
+    .grid-container-aboutus .main {
+        display: grid;
+        grid-template-columns: 2fr 2fr ;
+        background-color: #1e88da;
+    }
+
+    .grid-container-contactus .main{
+        display: grid;
+        grid-template-columns: 2fr 2fr;
+        background-color: #1e88da;
+    }
+    
+    .vehicle-listing {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        grid-gap: 25px;
+        margin: 25px;
+    }
+
+    .car-info {
+        display: grid;
+        grid-template-columns: 2fr 2fr;
+        grid-gap: 20px;
+    }
+
+    .grid-container-createaccount {
+        display: grid;
+        grid-template-columns: 2fr 2fr;
+        grid-gap: 20px;
+    }
+}
+
+/* -------------------Smart-Phones------------------- */
+
+@media only screen and (max-width: 1000px) {
+    
+    .grid-container-index {
+        display: grid;
+        grid-template-columns: 1fr;
+        background-color: #1e88da;
+    }
+    
+    .grid-container-categories {
+        display: grid;
+        grid-template-columns: 1fr;
+        background-color: #1e88da;
+    }
+
+    .grid-container-aboutus .main {
+        display: grid;
+        grid-template-columns: 1fr;
+        background-color: #1e88da;
+    }
+
+    .grid-container-contactus .main{
+        display: grid;
+        grid-template-columns: 2fr;
+        background-color: #1e88da;
+    }
+
+    .vehicle-listing {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: center;
+        grid-gap: 25px;
+        margin: 25px;
+    }
+    
+    .car-info {
+        display: grid;
+        grid-template-columns: 2fr;
+        grid-gap: 20px;
+    }
+
+    .grid-container-createaccount {
+        display: grid;
+        grid-template-columns: 2fr;
+        grid-gap: 20px;
+    }
+}
+
+
+/* -------------------Index.html------------------- */
+.Fun-Fact {
+    list-style-type: none;
+    padding: 10px;
+    text-align: center;
+    background-color: #0f0c7d;
+    border-radius: 5%;
+    margin: 10px;
+}
+
+#Car-sketch img {
+    max-width: 100%;
+    padding: 10px;
+    align-items: center;
+}
+
+/* -------------------Categories.html------------------- */
+.general-car-image img {
+    max-width: 100%;
+}
+
+.services-menu {
+    list-style-type: none;
+    margin: 20%;
+}
+
+.services-menu a {
+    display: block;
+    background-color: #9f9f9f;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 16px;
+    font-size: 17px;
+    width: 250px;
+}
+
+.services-menu a:hover {
+    background-color: #0f0c7d;
+}
+
+/* -------------------Aboutus.html------------------- */
+.team-members {
+    list-style-type: none;
+    padding: 10px;
+    text-align: center;
+    background-color: #0f0c7d;
+    border-radius: 5%;
+    margin: 10px;
+}
+
+.team-members img{
+    max-width: 75%;
+}
+
+.member {
+    flex: 50%;
+    padding: 10px;
+}
+
+/* -------------------Contactus.html & CreateAccount.html------------------- */
+.form {
+    list-style-type: none;
+    padding: 10px;
+    background-color: #0f0c7d;
+    border-radius: 5%;
+    margin: 10px;
+}
+
+.contactus-image img{
+    max-width: 75%;
+    padding:  15%;
+}
+
+.form img {
+    max-width: 75%;
+}
+
+button {
+    background-color: #9f9f9f;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #1e88da;
+}
+
+/* -------------------Car-Market.html & Moto-Market.html------------------- */
+.description {
+    list-style-type: none;
+    padding: 10px;
+    text-align: left;
+    border: solid #9f9f9f;
+    background-color: #0f0c7d;
+}
+
+.vehicle-listing img {
+    border: solid #9f9f9f;
+    max-width: 100%;
+    width: 70rem;
+    height: auto;
+}
+
+/* -------------------Car-Market-1-Details.html------------------- */
+
+.car-info img {
+    max-width: 100%;
+    width: 50rem;
+    height: auto;
+}
