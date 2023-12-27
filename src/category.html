@@ -43,7 +43,9 @@
 
 <script>
     window.onload = async function () {
-        const categoryID = 3;
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoryID = urlParams.get('id');
+        
         const subcategories = await getSubCategories(categoryID);
         const subcategoriesTemplate = document.getElementById("subcategory-template").innerHTML;
         const compiledSubcategoriesTemplate = Handlebars.compile(subcategoriesTemplate);
