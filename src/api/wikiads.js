@@ -16,7 +16,7 @@ async function getSubCategories(categoryId)
     return subCategories;
 }
 
-async function getSubcategoryAdds(subcategoryID)
+async function getSubcategoryAds(subcategoryID)
 {
     const response = await fetch(base_url + "/ads?subcategory=" + subcategoryID);
     const ads = await response.json();

@@ -45,7 +45,7 @@
     window.onload = async function () {
         const urlParams = new URLSearchParams(window.location.search);
         const categoryID = urlParams.get('id');
-        
+
         const subcategories = await getSubCategories(categoryID);
         const subcategoriesTemplate = document.getElementById("subcategory-template").innerHTML;
         const compiledSubcategoriesTemplate = Handlebars.compile(subcategoriesTemplate);
@@ -54,7 +54,7 @@
 
         for (const subcategory of subcategories)
         {
-            subcategory.ads = await getSubcategoryAdds(subcategory.id);
+            subcategory.ads = await getSubcategoryAds(subcategory.id);
             subcategoriesContainer.innerHTML += compiledSubcategoriesTemplate(subcategory);
         };
     }

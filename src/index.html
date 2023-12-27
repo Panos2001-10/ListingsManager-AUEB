@@ -28,7 +28,7 @@
             <div class="subcategory">
                 <ul>
                     {{#each subcategories}}
-                    <li><a href="subcategory.html">{{title}}</a></li>
+                    <li><a href="subcategory.html?id={{id}}">{{title}}</a></li>
                     {{/each}}
                 </ul>
             </div>
@@ -50,7 +50,7 @@
 
         for (const category of categories)
         {
-            category.subcategories = await getSubCategories(category.id)
+            category.subcategories = await getSubCategories(category.id);
             
             categoriesContainer.innerHTML += compiledCategoriesTemplate(category);
         };
