@@ -26,16 +26,12 @@
             <h2>{{title}}</h2>
             <a href="category.html"><img src="https://wiki-ads.onrender.com/{{img_url}}" width="50%" height="auto"></a>
             <div class="subcategory">
-                <h2>{{title}}</h2>
-                <a href="category.html"></a>
+                <ul>
+                    {{#each subcategories}}
+                    <li><a href="subcategory.html">{{title}}</a></li>
+                    {{/each}}
+                </ul>
             </div>
-            
-
-            <ul>
-                {{#each subcategories}}
-                    <li>{{title}}</li>
-                {{/each}}
-            </ul>
         </div>
     </script>
 

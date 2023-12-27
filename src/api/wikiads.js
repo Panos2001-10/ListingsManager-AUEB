@@ -16,7 +16,10 @@ async function getSubCategories(categoryId)
     return subCategories;
 }
 
-function test()
+async function getSubcategoryAdds(subcategoryID)
 {
-    console.log("peos");
+    const response = await fetch(base_url + "/ads?subcategory=" + subcategoryID);
+    const ads = await response.json();
+    
+    return ads;
 }
