@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="el">
+
+<head>
+    <!-- Κωδικοποίηση εγγράφου -->
+    <meta charset="utf-8">
+
+    <!-- Keywords & info για τον browser -->
+    <meta name="description" content="Αγορές-Ενοικιάσεις-Επισκευές οχημάτων">
+    <meta name="keywords" content="Αυτοκίνητα, Μοτοσυκλέτες, Αγορά, Leasing, Επισκευές, Αρχική, Σκοπός Ιστοσελίδας">
+
+    <!-- Ένωση με css αρχείο -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="api/wikiads.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+    <!-- Τίτλος για τον browser -->
+    <title>Home Page</title>
+</head>
+
+<body class="body">
+
+    <script id="category-template" type="text/x-handlebars-template">
+        <div class="category">
+
+            <h2>{{title}}</h2>
+            <a href="category.html?id={{id}}"><img src="https://wiki-ads.onrender.com/{{img_url}}" width="15%" height="auto"></a>
+            <div class="subcategory">
+                <ul>
+                    {{#each subcategories}}
+                    <li><a href="subcategory.html?id={{id}}">{{title}}</a></li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </script>
+
+    <div id="categories-container">
+    </div>
+
+</body>
+
+<script>
+    window.onload = async function () {
+        const categories = await getAllCategories();
+        const categoriesTemplate = document.getElementById("category-template").innerHTML;
+        const compiledCategoriesTemplate = Handlebars.compile(categoriesTemplate);
+
+        const categoriesContainer = document.getElementById("categories-container");
+
+        for (const category of categories)
+        {
+            category.subcategories = await getSubCategories(category.id);
+            
+            categoriesContainer.innerHTML += compiledCategoriesTemplate(category);
+        };
+    }
+</script>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="el">
+
+<head>
+   <!-- Κωδικοποίηση εγγράφου -->
+   <meta charset="utf-8">
+
+   <!-- Keywords & info για τον browser -->
+   <meta name="description" content="Αγορές-Ενοικιάσεις-Επισκευές οχημάτων">
+   <meta name="keywords" content="Αυτοκίνητα, Μοτοσυκλέτες, Αγορά, Leasing, Επισκευές, Αρχική, Σκοπός Ιστοσελίδας">
+
+   <!-- Ένωση με css αρχείο -->
+   <link rel="stylesheet" type="text/css" href="style.css">
+   <script src="api/wikiads.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+   <!-- Τίτλος για τον browser -->
+    <title>Subcategory Page</title>
+</head>
+
+<body class="body">
+    
+    <script id="subcategory-ads-template" type="text/x-handlebars-template">
+        <div class="subcategory-ads">
+            <ul>
+                <li>{{title}}</li>
+                <li>{{description}}</li>
+                {{#each images}}
+                <img src="https://wiki-ads.onrender.com/{{this}}" width="50%" height="auto">
+                {{/each}}
+                <li>{{cost}}</li>
+                <li>
+                    <h3>Χαρακτηριστικά:</h3>
+                    <ul>
+                        {{#each featuresArray}}
+                            <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </script>
+
+    <div id="subcategory-ads-container">
+    </div>
+
+</body>
+
+<script>
+    window.onload = async function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const subcategoryID = urlParams.get('id');              
+        
+        const subcategoryAds = await getSubcategoryAds(subcategoryID);
+        const subcategoryAdsTemplate = document.getElementById("subcategory-ads-template").innerHTML;
+        const compiledSubcategoryAsdTemplate = Handlebars.compile(subcategoryAdsTemplate);
+
+        const subcategoryAdsContainer = document.getElementById("subcategory-ads-container");
+
+        for (const ad of subcategoryAds)
+        {
+            ad.featuresArray = ad.features.split(';').map(feature => feature.trim());
+            subcategoryAdsContainer.innerHTML += compiledSubcategoryAsdTemplate(ad);
+        };
+    }
+</script>
+
+</html>
