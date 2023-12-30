@@ -13,10 +13,10 @@ function AddToFavorites(id, title, description, cost, imgURL, username, sessionI
     });
 }
 
-function DuplicateCheck(id)
+function DuplicateCheck(id, sessionID)
 {
     for (const element of userFavorites) {
-        if (id === element.id) {
+        if (id === element.id && sessionID === element.sessionID) {
             return true;
         }
     }

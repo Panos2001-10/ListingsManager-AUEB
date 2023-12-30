@@ -1,9 +1,11 @@
 const express = require ("express");
+const cors =require ("cors");
 const favoritesService = require ("./services/favoritesService");
 const authenticationService = require ("./services/authenticationService");
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 const port = 4444;
 
 app.put("/favorites", function(req, res) {
@@ -11,9 +13,9 @@ app.put("/favorites", function(req, res) {
     {
         res.status(401).send("Unauthorized user.");
     }
-    else if (favoritesService.DuplicateCheck(req.body.id))
+    else if (favoritesService.DuplicateCheck(req.body.id, req.body.sessionID))
     {
-        res.status(406).send("Ad is already in your favorites list.");
+        res.status(400).send("Ad is already in your favorites list.");
     }
     else
     {

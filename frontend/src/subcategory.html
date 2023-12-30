@@ -23,26 +23,35 @@
     <script id="subcategory-ads-template" type="text/x-handlebars-template">
         <div class="subcategory-ads">
             <ul>
-                <li>{{title}}</li>
-                <li>{{description}}</li>
-                {{#each images}}
-                <img src="https://wiki-ads.onrender.com/{{this}}" width="50%" height="auto">
-                {{/each}}
-                <li>{{cost}}</li>
-                <li>
-                    <h3>Χαρακτηριστικά:</h3>
-                    <ul>
-                        {{#each featuresArray}}
-                            <li>{{this}}</li>
-                        {{/each}}
-                    </ul>
-                </li>
+                <h2>{{title}}</h2>
+                <ul>
+                    <li>{{description}}</li>
+                    {{#each images}}
+                    <img src="https://wiki-ads.onrender.com/{{this}}" width="40%" height="auto">
+                    {{/each}}
+                    <li>{{cost}}</li>
+                    <li>
+                        <h3>Χαρακτηριστικά:</h3>
+                        <ul>
+                            {{#each featuresArray}}
+                                <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                </ul>
             </ul>
         </div>
     </script>
 
-    <div id="subcategory-ads-container">
+    <header class="header">
+        <img src="images/generic-logo.png" alt="Λογότυπο της Ιστοσελίδας" width="20%" height="auto">
+    </header>
+
+    <div class="main">
+        <div id="subcategory-ads-container">
+        </div>
     </div>
+    
 
 </body>
 

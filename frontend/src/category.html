@@ -12,6 +12,8 @@
    <!-- Ένωση με css αρχείο -->
    <link rel="stylesheet" type="text/css" href="style.css">
    <script src="api/wikiads.js"></script>
+   <script src="api/loginApi.js"></script>
+   <script src="api/favoritesApi.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 
    <!-- Τίτλος για τον browser -->
@@ -26,17 +28,48 @@
             <div class="subcategory-ads">
                 <ul>
                     {{#each ads}}
-                    <li>{{title}}</li>
-                    <li>{{description}}</li>
-                    <li>{{cost}}</li>
-                    <img src="https://wiki-ads.onrender.com/{{images.[0]}}" width="50%" height="auto">
+                    <h3>{{title}}</h3>
+                    <ul>
+                        <li>{{description}}</li>
+                        <li>{{cost}}</li>
+                        <img src="https://wiki-ads.onrender.com/{{images.[0]}}" width="40%" height="auto">
+                        <div class="favorite">
+                            <button onclick="onFavoriteButtonClick('{{super this}}')">Add to favorites</button>
+                        </div>
+                    </ul>
                     {{/each}}
                 </ul>
             </div>
         </div>
     </script>
 
-    <div id="subcategories-container">
+    <header class="header">
+        <img src="images/generic-logo.png" alt="Λογότυπο της Ιστοσελίδας" width="20%" height="auto">
+    </header>
+
+    <div class="main">
+        <div class="grid-container">
+            <div id="subcategories-container">
+            </div>
+
+            <div class="login-container">
+                <h2>Log-In</h2>
+                <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Log-In</button>
+                </div>
+                </form>
+                <div id="login-message" style="display: none;">You are logged in.</div>
+            </div>
+        </div>
     </div>
 
 </body>
@@ -57,7 +90,65 @@
             subcategory.ads = await getSubcategoryAds(subcategory.id);
             subcategoriesContainer.innerHTML += compiledSubcategoriesTemplate(subcategory);
         };
+
+        if (localStorage.getItem("sessionID")!== null)
+        {
+            localStorage.setItem("sessionID", null);
+        }
     }
+
+    document.getElementById('login-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        
+        const result = await LogInUser(username, password);
+        const sessionID = (await result.json()).sessionId;
+        localStorage.setItem("username", username);
+        localStorage.setItem("sessionID", sessionID);
+        const loginResult = await result.status;
+
+        if (loginResult === 200) 
+        {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('login-message').style.display = 'block';
+        }
+        else if (loginResult === 401) 
+        {
+            alert("Login failed. Please check your credentials.");
+        }
+    });
+
+    async function onFavoriteButtonClick(adEncoded)
+    {
+        let base64Decoded = atob(adEncoded);
+        let jsonString = decodeURIComponent(base64Decoded);
+        let finalForm = JSON.parse(jsonString);
+
+        const result = await AddToFavorites(finalForm.id, finalForm.title, finalForm.description, finalForm.cost, finalForm.images[0], localStorage.getItem("username"), localStorage.getItem("sessionID"));
+        const loginResult = await result.status;
+        if (loginResult === 200) 
+        {
+            alert("Ad added in favorites successfully.");
+        }
+        else if (loginResult === 400) 
+        {
+            alert("Ad is already in your favorites list.");
+        }
+        else if (loginResult === 401) 
+        {
+            alert("Unauthorized user.");
+        }
+    }
+
+    Handlebars.registerHelper('super', function(context) {
+        let jsonString = JSON.stringify(context);
+        let utf8Encoded = encodeURIComponent(jsonString);
+        let base64Encoded = btoa(utf8Encoded);
+        
+        return base64Encoded;
+    });
+
 </script>
 
 </html>
