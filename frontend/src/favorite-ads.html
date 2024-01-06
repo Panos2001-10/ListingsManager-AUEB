@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="el">
+
+<head>
+    <!-- Κωδικοποίηση εγγράφου -->
+   <meta charset="utf-8">
+
+   <!-- Keywords & info για τον browser -->
+   <meta name="description" content="Αγορές-Ενοικιάσεις-Επισκευές οχημάτων">
+   <meta name="keywords" content="Αυτοκίνητα, Μοτοσυκλέτες, Αγορά, Leasing, Επισκευές, Αρχική, Σκοπός Ιστοσελίδας">
+
+   <!-- Ένωση με css αρχείο -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="api/wikiads.js"></script>
+    <script src="api/loginApi.js"></script>
+    <script src="api/favoritesApi.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    
+   <!-- Τίτλος για τον browser -->
+    <title>Favorites List</title>
+</head>
+
+<body class="body">
+
+    <header class="header">
+        <img src="images/generic-logo.png" alt="Λογότυπο της Ιστοσελίδας" width="20%" height="auto">
+    </header>
+
+    <script id="favorites-template" type="text/x-handlebars-template">
+        <div class="favorite">
+            <h3>{{title}}</h3>
+            <ul>
+                <li>{{description}}</li>
+                <li>{{cost}}</li>
+                <img src="https://wiki-ads.onrender.com/{{imgURL}}" width="40%" height="auto">
+            </ul>
+        </div>
+    </script>
+
+    <div class="main">
+        <h2>Favorites List</h2>
+        <div id="favorites-container">
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+    <script>
+        window.onload = async function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const username = urlParams.get('username');
+            const sessionID = urlParams.get('sessionID');
+            
+            localStorage.setItem("username", username);
+            localStorage.setItem("sessionID", sessionID);
+
+            const favorites = await GetFavorites(username, sessionID);
+            const favoritesTemplate = document.getElementById("favorites-template").innerHTML;
+            const compiledFavoritesTemplate = Handlebars.compile(favoritesTemplate);
+
+            const favoritesContainer = document.getElementById("favorites-container");
+            
+            for (const favorite of favorites) {
+                favoritesContainer.innerHTML += compiledFavoritesTemplate(favorite);
+            }
+        }
+    </script>
+
+</body>
+
+</html>

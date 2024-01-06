@@ -67,7 +67,14 @@
                     <button type="submit">Log-In</button>
                 </div>
                 </form>
-                <div id="login-message" style="display: none;">You are logged in.</div>
+                <div id="login-message" style="display: none;">
+                    <h3>You are logged in.</h3>
+                    <div id="favorite-container" style="display: none;">
+                        <div class="favorite">
+                            <a href="favorite-ads.html?username=" id="favorites-link"><button>Favorites List</button></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -112,6 +119,17 @@
         {
             document.getElementById('login-form').style.display = 'none';
             document.getElementById('login-message').style.display = 'block';
+            document.getElementById('favorite-container').style.display = 'block';
+            
+            
+            const username = localStorage.getItem("username");
+            const sessionID = localStorage.getItem("sessionID");
+
+            if (username && sessionID) {
+                document.getElementById("favorites-link").href += username + "&sessionID=" + sessionID;
+                document.getElementById("favorite-container").style.display = 'block';
+            }
+        
         }
         else if (loginResult === 401) 
         {

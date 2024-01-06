@@ -8,6 +8,11 @@ app.use(express.json());
 app.use(cors());
 const port = 4444;
 
+app.get("/favorites", function(req, res){
+    favoritesList = favoritesService.GetFavorites(req.query.username, req.query.sessionID);
+    res.status(200).json(favoritesList);
+});
+
 app.put("/favorites", function(req, res) {
     if (!authenticationService.UsernameSessionIDConnection(req.body.username, req.body.sessionID))
     {

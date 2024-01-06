@@ -1,7 +1,4 @@
 async function AddToFavorites(id, title, description, cost, imgURL, username, sessionID) {
-    console.log(cost);
-    console.log(username);
-    console.log(imgURL);
     const response = await fetch(backlendURL + "/favorites", {
         method: 'PUT',
         headers: {
@@ -18,4 +15,12 @@ async function AddToFavorites(id, title, description, cost, imgURL, username, se
         })
     });
     return response;
+}
+
+async function GetFavorites(username, sessionID)
+{
+    const response = await fetch(backlendURL + "/favorites?username=" + username + "&sessionID=" + sessionID, {
+        method: 'GET'
+    })
+    return response.json();
 }
