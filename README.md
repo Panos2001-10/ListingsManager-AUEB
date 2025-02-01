@@ -11,7 +11,7 @@ This is a web application built using HTML, CSS, and JavaScript. It also incorpo
 ## Installation
 1. Clone the repository:
    ```sh
-   git clone https://github.com/Panos2001-10/web-dev-AUEB-2.git
+   git clone https://github.com/Panos2001-10/ListingsManager-AUEB.git
    ```
 2. Navigate to the backend folder and install dependencies:
    ```sh
